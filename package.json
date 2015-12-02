@@ -1,0 +1,30 @@
+{
+  "name": "parkour",
+  "version": "1.0.0",
+  "description": "Following along the tutorial from the Cocos2d-js 3.0 docs",
+  "main": "main.js",
+  "scripts": {
+    "watch": "webpack -wd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinsilvestre/cocos-parkour.git"
+  },
+  "author": "Justin Silvestre",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/justinsilvestre/cocos-parkour/issues"
+  },
+  "homepage": "https://github.com/justinsilvestre/cocos-parkour#readme",
+  "dependencies": {
+    "babel-core": "^6.2.1",
+    "babel-eslint": "^4.1.5",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-runtime": "^6.1.18",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-runtime": "^6.2.0",
+    "eslint": "^1.10.1",
+    "lodash": "^3.10.1",
+    "webpack": "^1.12.8"
+  }
+}
