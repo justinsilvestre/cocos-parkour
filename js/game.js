@@ -1,7 +1,7 @@
 import cc from 'cc';
-import HelloWorldScene from './HelloWorldScene'
+import MenuScene from './MenuScene'
 import res from './resources';
 
 export const resources = Object.keys(res).map((n) => res[n]);
 
-export const Scene = HelloWorldScene;
+export const Scene = MenuScene;

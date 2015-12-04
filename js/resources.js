@@ -1,7 +1,9 @@
 const dir = 'res';
 
 const filenames = [
-	'HelloWorld.png'
+	'helloBG.png',
+	'start_n.png',
+	'start_s.png'
 ];
 
 const resources = filenames.reduce((collection, filename) => {
