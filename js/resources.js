@@ -3,7 +3,9 @@ const dir = 'res';
 const filenames = [
 	'helloBG.png',
 	'start_n.png',
-	'start_s.png'
+	'start_s.png',
+	'PlayBG.png',
+	'runner.png'
 ];
 
 const resources = filenames.reduce((collection, filename) => {

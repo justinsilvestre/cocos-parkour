@@ -9,3 +9,5 @@ export const Layer = e('Layer');
 export const Sprite = e('Sprite');
 export const MenuItemSprite = e('MenuItemSprite');
 export const Menu = e('Menu');
+export const MoveTo = e('MoveTo');
+export const Sequence = e('Sequence')

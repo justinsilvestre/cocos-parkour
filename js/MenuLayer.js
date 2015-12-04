@@ -1,6 +1,7 @@
-import { p, winSize, MenuItemFont } from 'cc';
+import { p, winSize, MenuItemFont, director } from 'cc';
 import { Layer, Sprite, MenuItemSprite, Menu } from './cc-es6';
 import res from './resources';
+import PlayScene from './PlayScene';
 
 class MenuLayer extends Layer {
 	constructor() {
@@ -28,6 +29,7 @@ class MenuLayer extends Layer {
 
 	onPlay() {
 		cc.log("==onplay clicked");
+		director.runScene(new PlayScene());
 	}
 }
 
