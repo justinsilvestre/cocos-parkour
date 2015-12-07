@@ -11,6 +11,9 @@ class AnimationLayer extends Layer {
 		Object.assign(this, this.defaultProperties(space));
 
 		this.init();
+
+		this._debugNode = new cc.PhysicsDebugNode(this.space);
+		this.addChild(this._debugNode, 10);
 	}
 
 	defaultProperties(space) {
@@ -57,6 +60,10 @@ class AnimationLayer extends Layer {
 		this.sprite.runAction(this.runningAction);
 
 		this.spriteSheet.addChild(this.sprite);
+	}
+
+	getEyeX() {
+		return this.sprite.getPositionX() - RUNNER_START_X;
 	}
 }
 

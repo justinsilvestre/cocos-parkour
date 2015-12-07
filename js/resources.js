@@ -6,7 +6,10 @@ const filenames = [
 	'start_s.png',
 	'PlayBG.png',
 	'running.png',
-	'running.plist'
+	'running.plist',
+	'map.png',
+	'map00.tmx',
+	'map01.tmx'
 ];
 
 const resources = filenames.reduce((collection, filename) => {

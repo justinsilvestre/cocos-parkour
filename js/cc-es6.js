@@ -16,3 +16,4 @@ export const Animation = e('Animation');
 export const RepeatForever = e('RepeatForever');
 export const Animate = e('Animate');
 export const PhysicsSprite = e('PhysicsSprite');
+export const TMXTiledMap = e('TMXTiledMap');

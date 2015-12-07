@@ -1,9 +1,11 @@
+import { p } from 'cc';
 import { Space, v, SegmentShape } from 'cp';
-import { Scene } from './cc-es6';
+import { Scene, Layer } from './cc-es6';
 import { GROUND_HEIGHT } from './globals'
 import BackgroundLayer from './BackgroundLayer';
 import AnimationLayer from './AnimationLayer';
 import StatusLayer from './StatusLayer';
+import { BACKGROUND, ANIMATION, STATUS } from './tags';
 
 class PlayScene extends Scene {
 	constructor() {
@@ -17,9 +19,11 @@ class PlayScene extends Scene {
 
 		this.initPhysics();
 
-		this.addChild(new BackgroundLayer());
-		this.addChild(new AnimationLayer(this.space));
-		this.addChild(new StatusLayer());
+		this.gameLayer = new Layer();
+		this.gameLayer.addChild(new BackgroundLayer(), 0, BACKGROUND);
+		this.gameLayer.addChild(new AnimationLayer(this.space), 0, ANIMATION);
+		this.addChild(this.gameLayer);
+		this.addChild(new StatusLayer(), 0, STATUS);
 
 		this.scheduleUpdate();
 	}
@@ -36,6 +40,11 @@ class PlayScene extends Scene {
 
 	update(dt) {
 		this.space.step(dt);
+
+		var animationLayer = this.gameLayer.getChildByTag(ANIMATION);
+		var eyeX = animationLayer.getEyeX();
+
+		this.gameLayer.setPosition(p(-eyeX, 0))
 	}
 }
 
