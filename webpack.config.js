@@ -18,5 +18,5 @@ module.exports = {
         }
     }]
   },
-  externals: { cc: 'cc' }
+  externals: { cc: 'cc', cp: 'cp' }
 };
