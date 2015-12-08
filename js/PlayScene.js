@@ -5,13 +5,14 @@ import { GROUND_HEIGHT } from './globals'
 import BackgroundLayer from './BackgroundLayer';
 import AnimationLayer from './AnimationLayer';
 import StatusLayer from './StatusLayer';
-import { BACKGROUND, ANIMATION, STATUS } from './tags';
+import { BACKGROUND, ANIMATION, STATUS, RUNNER, COIN, ROCK } from './tags';
 
 class PlayScene extends Scene {
 	constructor() {
 		super();
 
 		this.space = null;
+		this.shapesToRemove = [];
 	}
 
 	onEnter() {
@@ -20,7 +21,7 @@ class PlayScene extends Scene {
 		this.initPhysics();
 
 		this.gameLayer = new Layer();
-		this.gameLayer.addChild(new BackgroundLayer(), 0, BACKGROUND);
+		this.gameLayer.addChild(new BackgroundLayer(this.space), 0, BACKGROUND);
 		this.gameLayer.addChild(new AnimationLayer(this.space), 0, ANIMATION);
 		this.addChild(this.gameLayer);
 		this.addChild(new StatusLayer(), 0, STATUS);
@@ -36,6 +37,12 @@ class PlayScene extends Scene {
 			v(4294967295, GROUND_HEIGHT), // MAX INT:4294967295
 			0); // thickness of wall
 		this.space.addStaticShape(wallBottom);
+
+		this.space.addCollisionHandler(RUNNER, COIN,
+			this.collisionCoinBegin.bind(this), null, null, null);
+		this.space.addCollisionHandler(RUNNER, ROCK,
+			this.collisionRockBegin.bind(this), null, null, null);
+
 	}
 
 	update(dt) {
@@ -44,7 +51,23 @@ class PlayScene extends Scene {
 		var animationLayer = this.gameLayer.getChildByTag(ANIMATION);
 		var eyeX = animationLayer.getEyeX();
 
-		this.gameLayer.setPosition(p(-eyeX, 0))
+		this.gameLayer.setPosition(p(-eyeX, 0));
+
+		for (let i = 0; i < this.shapesToRemove.length; i++) {
+			let shape = this.shapesToRemove[i];
+			this.gameLayer.getChildByTag(BACKGROUND).removeObjectByShape(shape);
+		}
+		this.shapesToRemove = [];
+	}
+
+	collisionCoinBegin(arbiter, space) {
+		var shapes = arbiter.getShapes();
+		// shapes[0] is runner
+		this.shapesToRemove.push(shapes[1]);
+	}
+
+	collisionRockBegin(arbiter, space) {
+		cc.log("==game over")
 	}
 }
 

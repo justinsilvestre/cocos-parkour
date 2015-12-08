@@ -9,7 +9,9 @@ const filenames = [
 	'running.plist',
 	'map.png',
 	'map00.tmx',
-	'map01.tmx'
+	'map01.tmx',
+	'background.png',
+	'background.plist'
 ];
 
 const resources = filenames.reduce((collection, filename) => {
