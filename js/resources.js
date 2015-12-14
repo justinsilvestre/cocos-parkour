@@ -11,7 +11,9 @@ const filenames = [
 	'map00.tmx',
 	'map01.tmx',
 	'background.png',
-	'background.plist'
+	'background.plist',
+	'restart_n.png',
+	'restart_s.png'
 ];
 
 const resources = filenames.reduce((collection, filename) => {

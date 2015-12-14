@@ -17,7 +17,9 @@ const classNames = [
   'RepeatForever',
   'Animate',
   'PhysicsSprite',
-  'TMXTiledMap'
+  'TMXTiledMap',
+  'LabelTTF',
+  'LayerColor'
 ];
 
 const extended = classNames.reduce(

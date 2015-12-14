@@ -10,6 +10,8 @@ class StatusLayer extends Layer {
 			labelMeter: null,
 			coins: 0
 		});
+
+		this.init();
 	}
 
 	init() {
@@ -23,6 +25,15 @@ class StatusLayer extends Layer {
 		this.labelMeter = new LabelTTF('0M', 'Helvetica', 20);
 		this.labelMeter.setPosition(p(winSize.width - 70, winSize.height - 20));
 		this.addChild(this.labelMeter);
+	}
+
+	updateMeter(px) {
+		this.labelMeter.setString(`${parseInt(px / 10)} M`);
+	}
+
+	addCoin(num) {
+		this.coins += num;
+		this.labelCoin.setString(`Coins: ${this.coins}`);
 	}
 }
 

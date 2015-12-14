@@ -1,10 +1,11 @@
-import { p } from 'cc';
+import { p, director, log } from 'cc';
 import { Space, v, SegmentShape } from 'cp';
 import { Scene, Layer } from './cc-es6';
 import { GROUND_HEIGHT } from './globals'
 import BackgroundLayer from './BackgroundLayer';
 import AnimationLayer from './AnimationLayer';
 import StatusLayer from './StatusLayer';
+import GameOverLayer from './GameOverLayer';
 import { BACKGROUND, ANIMATION, STATUS, RUNNER, COIN, ROCK } from './tags';
 
 class PlayScene extends Scene {
@@ -61,13 +62,20 @@ class PlayScene extends Scene {
 	}
 
 	collisionCoinBegin(arbiter, space) {
+				log("==coin");
+
+		var statusLayer = this.getChildByTag(STATUS);
+		statusLayer.addCoin(1);
+
 		var shapes = arbiter.getShapes();
 		// shapes[0] is runner
 		this.shapesToRemove.push(shapes[1]);
 	}
 
 	collisionRockBegin(arbiter, space) {
-		cc.log("==game over")
+		log("==game over");
+		this.addChild(new GameOverLayer());
+		director.pause();
 	}
 }
 
