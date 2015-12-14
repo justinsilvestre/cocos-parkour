@@ -4,16 +4,24 @@ function e(className) {
 	return cc[className].extend({});
 }
 
-export const Scene = e('Scene');
-export const Layer = e('Layer');
-export const Sprite = e('Sprite');
-export const MenuItemSprite = e('MenuItemSprite');
-export const Menu = e('Menu');
-export const MoveTo = e('MoveTo');
-export const Sequence = e('Sequence');
-export const SpriteBatchNode = e('SpriteBatchNode');
-export const Animation = e('Animation');
-export const RepeatForever = e('RepeatForever');
-export const Animate = e('Animate');
-export const PhysicsSprite = e('PhysicsSprite');
-export const TMXTiledMap = e('TMXTiledMap');
+const classNames = [
+  'Scene',
+  'Layer',
+  'Sprite',
+  'MenuItemSprite',
+  'Menu',
+  'MoveTo',
+  'Sequence',
+  'SpriteBatchNode',
+  'Animation',
+  'RepeatForever',
+  'Animate',
+  'PhysicsSprite',
+  'TMXTiledMap'
+];
+
+const extended = classNames.reduce(
+  (obj, className) => Object.assign(obj, { [ className ]: e(className) }),
+  {});
+
+module.exports = extended;

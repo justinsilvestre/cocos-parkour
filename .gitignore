@@ -2,3 +2,12 @@ node_modules
 simulator
 .DS_STORE
 src
+frameworks/cocos2d-x/cocos/platform/android/java/bin/
+frameworks/cocos2d-x/cocos/platform/android/java/gen/
+frameworks/cocos2d-x/cocos/platform/android/java/local.properties
+frameworks/runtime-src/proj.android/assets/
+frameworks/runtime-src/proj.android/bin/
+frameworks/runtime-src/proj.android/gen/
+frameworks/runtime-src/proj.android/libs/
+frameworks/runtime-src/proj.android/local.properties
+frameworks/runtime-src/proj.android/obj/
