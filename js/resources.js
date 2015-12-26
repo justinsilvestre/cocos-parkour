@@ -13,7 +13,10 @@ const filenames = [
 	'background.png',
 	'background.plist',
 	'restart_n.png',
-	'restart_s.png'
+	'restart_s.png',
+	'background.mp3',
+	'jump.mp3',
+	'pickup_coin.mp3'
 ];
 
 const resources = filenames.reduce((collection, filename) => {

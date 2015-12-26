@@ -1,4 +1,4 @@
-import { p, director, log } from 'cc';
+import { p, director, audioEngine, log } from 'cc';
 import { Space, v, SegmentShape } from 'cp';
 import { Scene, Layer } from './cc-es6';
 import { GROUND_HEIGHT } from './globals'
@@ -7,6 +7,7 @@ import AnimationLayer from './AnimationLayer';
 import StatusLayer from './StatusLayer';
 import GameOverLayer from './GameOverLayer';
 import { BACKGROUND, ANIMATION, STATUS, RUNNER, COIN, ROCK } from './tags';
+import res from './resources';
 
 class PlayScene extends Scene {
 	constructor() {
@@ -26,6 +27,8 @@ class PlayScene extends Scene {
 		this.gameLayer.addChild(new AnimationLayer(this.space), 0, ANIMATION);
 		this.addChild(this.gameLayer);
 		this.addChild(new StatusLayer(), 0, STATUS);
+
+		audioEngine.playMusic(res.background_mp3, true);
 
 		this.scheduleUpdate();
 	}
@@ -64,6 +67,8 @@ class PlayScene extends Scene {
 	collisionCoinBegin(arbiter, space) {
 				log("==coin");
 
+		audioEngine.playEffect(res.pickup_coin_mp3)
+
 		var statusLayer = this.getChildByTag(STATUS);
 		statusLayer.addCoin(1);
 
@@ -76,6 +81,7 @@ class PlayScene extends Scene {
 		log("==game over");
 		this.addChild(new GameOverLayer());
 		director.pause();
+		audioEngine.stopMusic();
 	}
 }
 

@@ -1,4 +1,4 @@
-import { p, spriteFrameCache, eventManager, EventListener } from 'cc';
+import { p, spriteFrameCache, eventManager, EventListener, audioEngine } from 'cc';
 import { Body, momentForBox, BoxShape, v } from 'cp';
 import { RUNNER_START_X, GROUND_HEIGHT } from './globals'
 import { Layer, PhysicsSprite, SpriteBatchNode, Animation, RepeatForever, Animate } from './cc-es6';
@@ -149,6 +149,7 @@ class AnimationLayer extends Layer {
 		if (this.stat === RUNNING) {
 			this.body.applyImpulse(v(0, 250), v(0,0))
 		}
+		audioEngine.playEffect(res.jump_mp3);
 	}
 
 	onExit() {
