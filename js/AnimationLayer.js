@@ -85,54 +85,40 @@ class AnimationLayer extends Layer {
 		statusLayer.updateMeter(this.sprite.getPositionX() - RUNNER_START_X);
 
 		var vel = this.body.getVel();
-		if (this.stat === JUMP_UP) {
-			if (vel.y < 0.1) {
-				this.stat = JUMP_DOWN;
-				this.sprite.stopAllActions();
-				this.sprite.runAction(this.jumpDownAction);
-			}
-		} else if (this.stat === JUMP_DOWN) {
-			if (vel.y === 0) {
-				this.stat = RUNNING;
-				this.sprite.stopAllActions();
-				this.sprite.runAction(this.runningAction);
-			}
+		var nextAction;
+		if (this.stat === JUMP_UP && vel.y < 0.1) {
+			this.stat = JUMP_DOWN;
+			nextAction = this.jumpDownAction;
+		} else if (this.stat === JUMP_DOWN && vel.y === 0) {
+			this.stat = RUNNING;
+			nextAction = this.runningAction;
+		}
+		if (nextAction) {
+			this.sprite.stopAllActions();
+			this.sprite.runAction(nextAction)
 		}
 	}
 
 	initAction() {
-		var animFrames = [];
-		for (let i = 0; i < 8; i++) {
-			let str = `runner${i}.png`;
-			let frame = spriteFrameCache.getSpriteFrame(str);
-			animFrames.push(frame);
+		function animationFromFrames(name, frameCount, speed) {
+			var frames = [];
+			for (let i = 0; i < frameCount; i++) {
+				let frame = spriteFrameCache.getSpriteFrame(`${name}${i}.png`);
+				frames.push(frame);
+			}
+			return new Animate(new Animation(frames, speed));
 		}
 
-		var animation = new Animation(animFrames, 0.1);
-		this.runningAction = new RepeatForever(new Animate(animation));
+		this.runningAction = new RepeatForever(animationFromFrames('runner', 8, 0.1));
 		this.runningAction.retain();
 
-		animFrames = [];
-		for (let i = 0; i < 4; i++) {
-			let str = `runnerJumpUp${i}.png`;
-			let frame = spriteFrameCache.getSpriteFrame(str);
-			animFrames.push(frame);
-		}
-
-		animation = new Animation(animFrames, 0.2);
-		this.jumpUpAction = new Animate(animation);
+		this.jumpUpAction = animationFromFrames('runnerJumpUp', 4, 0.2);
 		this.jumpUpAction.retain();
 
-		animFrames = [];
-		for (let i = 0; i < 2; i++) {
-			let str = `runnerJumpDown${i}.png`;
-			let frame = spriteFrameCache.getSpriteFrame(str);
-			animFrames.push(frame);
-		}
-
-		animation = new Animation(animFrames, 0.3);
-		this.jumpDownAction = new Animate(animation);
+		this.jumpDownAction = animationFromFrames('runnerJumpDown', 2, 0.3)
 		this.jumpDownAction.retain();
+
+		return;
 	}
 
 	onTouchBegan(touch, event) {
